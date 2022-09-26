@@ -10,7 +10,7 @@ pipeline {
          stage('Clone repository') { 
             steps { 
                 script{
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_credentials', url: 'https://github.com/enzopcastillo/devops-automation']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_credentials', url: 'https://github.com/enzopcastillo/demo-test']]])
                     sh 'mvn clean install'
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
         stage('Build') { 
             steps { 
                 script{
-                 app = docker.build("enzopcastillo/devops-test")
+                 app = docker.build("enzopcastillo/demo-test")
                 }
             }
         }
