@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-deployment
+  name: k8s-nginx
 spec:
   selector:
     matchLabels:
-      app: k8s-test
+      app: k8s-nginx
   replicas: 2 
   template:
     metadata:
       labels:
-        app: k8s-test
+        app: k8s-nginx
     spec:
       containers:
-        - name: k8s-test
+        - name: k8s-nginx
           image: enzopcastillo/devops-test 
           imagePullPolicy: IfNotPresent
           ports:
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1 
 kind: Service
 metadata: 
-  name: k8s-svc
+  name: k8s-nginx
 spec:
   selector:
-    app: k8s-test
+    app: k8s-nginx
   ports:
     - protocol: "TCP"
       port: 8080 # The port that the service is running on in the cluster
