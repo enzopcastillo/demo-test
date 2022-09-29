@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: k8s-nginx
-  replicas: 2 
+  replicas: 1 
   template:
     metadata:
       labels:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: k8s-nginx
-          image: enzopcastillo/devops-test 
+          image: enzopcastillo/demo-test:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8090 # The port that the container is running on in the cluster
@@ -25,11 +25,13 @@ apiVersion: v1
 kind: Service
 metadata: 
   name: k8s-nginx
+  labels:
+    app: k8s-nginx
 spec:
+  type: NodePort
   selector:
     app: k8s-nginx
   ports:
-    - protocol: "TCP"
-      port: 8080 # The port that the service is running on in the cluster
-      targetPort: 8090 # The port exposed by the service
-  type: NodePort
+    - protocol: TCP
+      port: 8090 # The port that the service is running on in the cluster
+      name: http
