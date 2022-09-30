@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-nginx
+  name: k8s-maven
 spec:
   selector:
     matchLabels:
-      app: k8s-nginx
+      app: k8s-maven
   replicas: 1 
   template:
     metadata:
       labels:
-        app: k8s-nginx
+        app: k8s-maven
     spec:
       containers:
-        - name: k8s-nginx
-          image: enzopcastillo/demo-test:latest
+        - name: k8s-maven
+          image: enzopcastillo/demo-test
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8090 # The port that the container is running on in the cluster
@@ -24,13 +24,13 @@ spec:
 apiVersion: v1 
 kind: Service
 metadata: 
-  name: k8s-nginx
+  name: k8s-maven
   labels:
-    app: k8s-nginx
+    app: k8s-maven
 spec:
   type: NodePort
   selector:
-    app: k8s-nginx
+    app: k8s-maven
   ports:
     - protocol: TCP
       port: 8090 # The port that the service is running on in the cluster
